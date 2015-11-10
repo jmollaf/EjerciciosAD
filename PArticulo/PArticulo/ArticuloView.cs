@@ -33,6 +33,7 @@ namespace PArticulo
 			DbCommandHelper.AddParameter (dbCommand, "categoria", categoria);
 			DbCommandHelper.AddParameter (dbCommand, "precio", precio);
 			dbCommand.ExecuteNonQuery ();
+			Destroy ();
 		}
 	}
 }
