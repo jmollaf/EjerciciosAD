@@ -1,6 +1,6 @@
 using System;
 using Gtk;
-
+using System.Collections;
 using SerpisAd;
 using PArticulo;
 
@@ -12,6 +12,7 @@ public partial class MainWindow: Gtk.Window
 		Console.WriteLine ("MainWindow ctor.");
 		fillTreeView ();
 
+
 		newAction.Activated += delegate {
 			new ArticuloView();
 		};
@@ -20,7 +21,13 @@ public partial class MainWindow: Gtk.Window
 
 			fillTreeView();
 	    };
-	
+		deleteAction.Activated += delegate {
+
+			TreeIter treeIter;
+			treeView.Selection.GetSelected (out treeIter);
+			IList row = (IList)treeView.Model.GetValue (treeIter, 0);
+			Console.WriteLine ("Click en delete action id={0}", row [0]);
+		};
 	}
 
 //	void newActionActivated (object sender, EventArgs e)
@@ -43,5 +50,6 @@ public partial class MainWindow: Gtk.Window
 		foreach (TreeViewColumn treeViewColumn in treeViewColumns)
 			treeView.RemoveColumn (treeViewColumn);
 	}
+	//private static void 
 
 }
