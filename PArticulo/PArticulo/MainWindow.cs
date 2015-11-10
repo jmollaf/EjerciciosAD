@@ -29,9 +29,7 @@ public partial class MainWindow: Gtk.Window
 //	}
 	private void fillTreeView(){
 		//Primero tenemos que borrar las columnas existentes en el treeView porque sino se repiten
-		TreeViewColumn[] treeViewColumns = treeView.Columns;
-		foreach (TreeViewColumn treeViewColumn in treeViewColumns)
-			treeView.RemoveColumn (treeViewColumn);
+		removeAllColumns(treeView);
 		QueryResult queryResult = PersisterHelper.Get ("select * from articulo");
 		TreeViewHelper.Fill (treeView, queryResult);
 	}
@@ -39,6 +37,11 @@ public partial class MainWindow: Gtk.Window
 	{
 		Application.Quit ();
 		a.RetVal = true;
+	}
+	private static void removeAllColumns(TreeView treeView){
+		TreeViewColumn[] treeViewColumns = treeView.Columns;
+		foreach (TreeViewColumn treeViewColumn in treeViewColumns)
+			treeView.RemoveColumn (treeViewColumn);
 	}
 
 }
